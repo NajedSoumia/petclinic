@@ -17,15 +17,15 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker build -t $IMAGE_NAME:$TAG .'
-            }
-        }
-
         stage('Prepare WAR') {
             steps {
                 sh 'cp target/petclinic.war .'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $IMAGE_NAME:$TAG .'
             }
         }
 
