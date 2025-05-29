@@ -325,6 +325,7 @@
                     <includes>
                         <include>**/*Tests.java</include>
                     </includes>
+                    <testFailureIgnore>false</testFailureIgnore>
                 </configuration>
             </plugin>
 
@@ -464,7 +465,7 @@
     </build>
 
     <profiles>
-        <profile>
+<!--         <profile>
             <id>H2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -485,8 +486,8 @@
                     <scope>runtime</scope>
                 </dependency>
             </dependencies>
-        </profile>
-        <profile>
+        </profile> -->
+<!--         <profile>
             <id>HSQLDB</id>
             <properties>
                 <db.script>hsqldb</db.script>
@@ -504,14 +505,17 @@
                     <scope>runtime</scope>
                 </dependency>
             </dependencies>
-        </profile>
+        </profile> -->
         <profile>
             <id>MySQL</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <db.script>mysql</db.script>
                 <jpa.database>MYSQL</jpa.database>
                 <jdbc.driverClassName>com.mysql.cj.jdbc.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:mysql://localhost:3306/petclinic?useUnicode=true</jdbc.url>
+                <jdbc.url>jdbc:mysql://192.168.50.70:3306/petclinic?useUnicode=true</jdbc.url>
                 <jdbc.username>petclinic</jdbc.username>
                 <jdbc.password>petclinic</jdbc.password>
             </properties>
