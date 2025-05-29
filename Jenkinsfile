@@ -23,6 +23,12 @@ pipeline {
             }
         }
 
+        stage('Prepare WAR') {
+            steps {
+                sh 'cp target/petclinic.war .'
+            }
+        }
+
         stage('Push Docker Image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
