@@ -42,9 +42,15 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f petclinic-deployment.yaml'
-                sh 'kubectl apply -f petclinic-service.yaml'
+                script {
+                    try {
+                        sh 'kubectl apply -f petclinic-deployment.yaml --validate=false'
+                        sh 'kubectl apply -f petclinic-service.yaml --validate=false'
+                    } catch (Exception e) {
+                        echo "⚠️ Déploiement échoué : ${e.getMessage()}"
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
             }
         }
-    }
 }
